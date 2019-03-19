@@ -1,0 +1,69 @@
+{% extends "../base.html" %}
+{% load static %}
+
+{% block title %}
+	{{ title }}
+{% endblock title %}
+
+
+{% block javascript %}
+  	<script src="{% static 'dashboard/js/mahasiswa.js' %}"></script>
+{% endblock %}
+
+
+{% block content %}
+
+	<h1 class="page-header text-center"><a href="{% url 'dashboard:mahasiswa-list' %}">{{ title }}</a></h1>
+
+	 <p>
+	    <button type="button" class="btn btn-primary js-create-mahasiswa" data-url="{% url 'dashboard:mahasiswa-tambah' %}">
+	      <span class="glyphicon glyphicon-plus"></span>
+	      Mahasiswa Baru
+	    </button>
+
+	    <a href="{% url 'logout' %}" class="btn btn-primary pull-right">
+          <span class="glyphicon glyphicon-log-out"></span> Log out
+        </a>
+	  </p>
+
+	 
+	 <form class="form-inline" method="get" action="{% url 'dashboard:mahasiswa-cari' %}">
+	 	<div class="form-group mx-sm-3 mb-2">
+		    <input type="text" class="form-control" placeholder="Cari Data" name="cari">
+ 		 </div>
+  		
+  		<button type="submit" class="btn btn-primary mb-2">cari</button>
+	 </form>
+
+
+	 {% if banyak_data %}
+	 	<p>Data : {{ banyak_data }}</p>
+	 {% endif %}
+
+	 <table class="table" id="mahasiswa-table">
+	    <thead>
+	      <tr>
+	        <th>Nim</th>
+	        <th>Nama</th>
+	        <th>Jenis Kelamin</th>
+	        <th>Tempat Lahir</th>
+	        <th>Tanggal Lahir</th>
+	        <th>Agama</th>
+	        <th>Alamat</th>
+	        <th>Aksi</th>
+	      </tr>
+	    </thead>
+	    
+	    <tbody>
+	    	{% include "dashboard/includes/partial_mahasiswa_list.html" %}
+	    </tbody>
+	  </table>
+
+	   <div class="modal fade" id="modal-mahasiswa">
+	    <div class="modal-dialog">
+	      <div class="modal-content">
+
+	      </div>
+	    </div>
+	  </div>
+{% endblock content %}

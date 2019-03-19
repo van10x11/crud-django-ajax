@@ -1,0 +1,28 @@
+{% for mahasiswa in mahasiswa_list %}
+	<tr>
+		<td>{{ mahasiswa.nim }}</td>
+		<td>{{ mahasiswa.nama }}</td>
+		<td>{{ mahasiswa.jenis_kelamin }}</td>
+		<td>{{ mahasiswa.tempat_lahir }}</td>
+		<td>{{ mahasiswa.tanggal_lahir }}</td>
+		<td>{{ mahasiswa.agama }}</td>
+		<td>{{ mahasiswa.alamat }}</td>
+		<td style="width: 150px">
+	      <button type="button"
+	              class="btn btn-warning btn-sm js-update-mahasiswa"
+	              data-url="{% url 'dashboard:mahasiswa-ubah' nim_mahasiswa=mahasiswa.nim %}">
+	        <span class="glyphicon glyphicon-pencil"></span> Edit
+	      </button>
+	      <button type="button"
+	              class="btn btn-danger btn-sm js-delete-mahasiswa"
+	              data-url="{% url 'dashboard:mahasiswa-hapus' nim_mahasiswa=mahasiswa.nim %}">
+	        <span class="glyphicon glyphicon-trash"></span> Delete
+	      </button>
+	    </td>
+				   
+	</tr>
+	{% empty %}
+		<tr>
+			<td colspan="8" class="text-center bg-warning">Tidak Ada Mahasiswa</td>
+		</tr>
+{% endfor %}  
